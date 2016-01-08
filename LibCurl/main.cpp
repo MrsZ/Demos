@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	{
 		strErr = curl.getLastError();
 	}
-	ret = curl.upLoad("2222.doc", "D://2222.doc");
+	ret = curl.upLoad("2222.docx", "D:\\2222.docx");
 	if (ret)
 	{
 		strErr = curl.getLastError();

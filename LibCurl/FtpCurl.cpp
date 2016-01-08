@@ -6,12 +6,14 @@ FtpCurl::FtpCurl(void)
 	m_lTrise = 3;
 
 	curl_global_init(CURL_GLOBAL_ALL);
-	m_pCurlHandle = curl_easy_init();
+	m_pCurlHandleDown = curl_easy_init();
+	m_pCurlHandleUp = curl_easy_init();
 }
 
 FtpCurl::~FtpCurl(void)
 {
-	curl_easy_cleanup(m_pCurlHandle);
+	curl_easy_cleanup(m_pCurlHandleDown);
+	curl_easy_cleanup(m_pCurlHandleUp);
 	curl_global_cleanup();
 }
 
@@ -62,8 +64,6 @@ size_t readFile( void* ptr, size_t size, size_t nmemb, void* stream )
 
 int FtpCurl::downLoad( const std::string& ftpPath, const std::string& localPath )
 {
-	curl_global_init(CURL_GLOBAL_ALL);
-	CURL* pCurlHandle = curl_easy_init();
 	int ret = 0;
 	long fileSize = 0;
 	FILE* file = fopen(localPath.c_str(), "wb+");
@@ -81,23 +81,23 @@ int FtpCurl::downLoad( const std::string& ftpPath, const std::string& localPath 
 	remotePaht.append(m_strFtpIPAddress);
 	remotePaht.append(ftpPath);
 
-	curl_easy_setopt(pCurlHandle, CURLOPT_URL, remotePaht.c_str());
+	curl_easy_setopt(m_pCurlHandleDown, CURLOPT_URL, remotePaht.c_str());
 
 	// 设置超时
-	curl_easy_setopt(pCurlHandle, CURLOPT_CONNECTTIMEOUT, m_lTimeOut);
+	curl_easy_setopt(m_pCurlHandleDown, CURLOPT_CONNECTTIMEOUT, m_lTimeOut);
 
 	// 设置头处理函数
-	curl_easy_setopt(pCurlHandle, CURLOPT_HEADERFUNCTION, contentlegth);
+	curl_easy_setopt(m_pCurlHandleDown, CURLOPT_HEADERFUNCTION, contentlegth);
 
 	// 获取长度值
-	curl_easy_setopt(pCurlHandle, CURLOPT_HEADERDATA, &fileSize);
+	curl_easy_setopt(m_pCurlHandleDown, CURLOPT_HEADERDATA, &fileSize);
 
 	// 写文件
-	curl_easy_setopt(pCurlHandle, CURLOPT_WRITEFUNCTION, wirteFile); 
-	curl_easy_setopt(pCurlHandle, CURLOPT_WRITEDATA, file);
-	curl_easy_setopt(pCurlHandle, CURLOPT_NOPROGRESS, 1L);
-	curl_easy_setopt(pCurlHandle, CURLOPT_VERBOSE, 1L);
-	CURLcode r = curl_easy_perform(pCurlHandle);
+	curl_easy_setopt(m_pCurlHandleDown, CURLOPT_WRITEFUNCTION, wirteFile); 
+	curl_easy_setopt(m_pCurlHandleDown, CURLOPT_WRITEDATA, file);
+	curl_easy_setopt(m_pCurlHandleDown, CURLOPT_NOPROGRESS, 1L);
+	curl_easy_setopt(m_pCurlHandleDown, CURLOPT_VERBOSE, 1L);
+	CURLcode r = curl_easy_perform(m_pCurlHandleDown);
 
 	fclose(file);
 	if (r != CURLE_OK)
@@ -106,15 +106,11 @@ int FtpCurl::downLoad( const std::string& ftpPath, const std::string& localPath 
 		m_strLastErrot = curl_easy_strerror(r);
 	}
 
-	curl_easy_cleanup(pCurlHandle);
-	curl_global_cleanup();
 	return ret;
 }
 
 int FtpCurl::upLoad( const std::string& ftpPath, const std::string& localPath )
 {
-	curl_global_init(CURL_GLOBAL_ALL);
-	CURL* pCurlHandle = curl_easy_init();
 	int ret = 0;
 	long fileSize = 0;
 	FILE* file = fopen(localPath.c_str(), "rb+");
@@ -132,46 +128,46 @@ int FtpCurl::upLoad( const std::string& ftpPath, const std::string& localPath )
 	remotePaht.append(m_strFtpIPAddress);
 	remotePaht.append(ftpPath);
 
-	curl_easy_setopt(pCurlHandle, CURLOPT_UPLOAD, 1L);
-	curl_easy_setopt(pCurlHandle, CURLOPT_URL, remotePaht.c_str());
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_UPLOAD, 1L);
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_URL, remotePaht.c_str());
 
 	// 设置超时
-	curl_easy_setopt(pCurlHandle, CURLOPT_FTP_RESPONSE_TIMEOUT, m_lTimeOut);
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_FTP_RESPONSE_TIMEOUT, m_lTimeOut);
 
-	curl_easy_setopt(pCurlHandle, CURLOPT_HEADERFUNCTION, contentlegth);
-	curl_easy_setopt(pCurlHandle, CURLOPT_HEADERDATA, &fileSize);
-	curl_easy_setopt(pCurlHandle, CURLOPT_WRITEFUNCTION, discard);
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_HEADERFUNCTION, contentlegth);
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_HEADERDATA, &fileSize);
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_WRITEFUNCTION, discard);
 
 	// 读文件
-	curl_easy_setopt(pCurlHandle, CURLOPT_READFUNCTION, readFile);
-	curl_easy_setopt(pCurlHandle, CURLOPT_READDATA, file);
-	curl_easy_setopt(pCurlHandle, CURLOPT_FTPPORT, "-");
-	curl_easy_setopt(pCurlHandle, CURLOPT_FTP_CREATE_MISSING_DIRS, 1L);
-	curl_easy_setopt(pCurlHandle, CURLOPT_VERBOSE, 1L);
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_READFUNCTION, readFile);
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_READDATA, file);
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_FTPPORT, "-");
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_FTP_CREATE_MISSING_DIRS, 1L);
+	curl_easy_setopt(m_pCurlHandleUp, CURLOPT_VERBOSE, 1L);
 	
 	CURLcode r = CURLE_GOT_NOTHING;
 	for (int i = 0; r != CURLE_OK && i < m_lTrise; ++i)
 	{
 		if (i)
 		{
-			curl_easy_setopt(pCurlHandle, CURLOPT_NOBODY, 1L);
-			curl_easy_setopt(pCurlHandle, CURLOPT_HEADER, 1L);
-			r = curl_easy_perform(pCurlHandle);
+			curl_easy_setopt(m_pCurlHandleUp, CURLOPT_NOBODY, 1L);
+			curl_easy_setopt(m_pCurlHandleUp, CURLOPT_HEADER, 1L);
+			r = curl_easy_perform(m_pCurlHandleUp);
 			if (r != CURLE_OK)
 			{
 				continue;
 			}
-			curl_easy_setopt(pCurlHandle, CURLOPT_NOBODY, 0L);
-			curl_easy_setopt(pCurlHandle, CURLOPT_HEADER, 0L);
+			curl_easy_setopt(m_pCurlHandleUp, CURLOPT_NOBODY, 0L);
+			curl_easy_setopt(m_pCurlHandleUp, CURLOPT_HEADER, 0L);
 			fseek(file, fileSize, SEEK_SET);
-			curl_easy_setopt(pCurlHandle, CURLOPT_APPEND, 1L);
+			curl_easy_setopt(m_pCurlHandleUp, CURLOPT_APPEND, 1L);
 		}
 		else
 		{
-			curl_easy_setopt(pCurlHandle, CURLOPT_APPEND, 0L);
+			curl_easy_setopt(m_pCurlHandleUp, CURLOPT_APPEND, 0L);
 		}
 
-		r = curl_easy_perform(pCurlHandle);
+		r = curl_easy_perform(m_pCurlHandleUp);
 	}
 
 	fclose(file);
@@ -180,7 +176,6 @@ int FtpCurl::upLoad( const std::string& ftpPath, const std::string& localPath )
 		ret = -1;
 		m_strLastErrot = curl_easy_strerror(r);
 	}
-	curl_easy_cleanup(pCurlHandle);
-	curl_global_cleanup();
+
 	return ret;
 }

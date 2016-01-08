@@ -30,7 +30,8 @@ public:
 	int upLoad(const std::string& ftpPath, const std::string& localPath);
 
 private:
-	CURL* m_pCurlHandle;
+	CURL* m_pCurlHandleDown;
+	CURL* m_pCurlHandleUp;
 	long m_lTimeOut;                       // 超时连接
 	long m_lTrise;                         // 连接次数
 	std::string m_strFtpName;              // ftp登录用户名，如admin
