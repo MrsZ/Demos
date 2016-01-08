@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+*.ncb
+*.suo
+
+Win32
+Delegates/GeneratedFiles
