@@ -4,10 +4,17 @@
 int main(int argc, char **argv)
 {
 	FtpCurl curl;
-	curl.setConnect("admin", "123456", "192.168.3.91/Apps/");
+	curl.setConnect("admin", "123456", "192.168.3.98");
 	int ret = 0;
-	ret = curl.downLoad("1111.doc", "D:\\1111.doc");
+
 	std::string strErr;
+	ret = curl.listFiles("", strErr);
+	if (ret)
+	{
+		strErr = curl.getLastError();
+	}
+
+	ret = curl.downLoad("1111.doc", "D:\\1111.doc");
 	if (ret)
 	{
 		strErr = curl.getLastError();
@@ -17,5 +24,6 @@ int main(int argc, char **argv)
 	{
 		strErr = curl.getLastError();
 	}
+	getchar();
 	return 0;
 }

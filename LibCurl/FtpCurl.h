@@ -8,7 +8,6 @@
 #define FTPCURL_H
 
 #include <iostream>
-#include "curl/curl.h"
 
 class FtpCurl
 {
@@ -23,6 +22,9 @@ public:
 
 	std::string getLastError();
 
+	// 列出文件列表，ftpPath：文件在ftp的路径, strContent返回内容
+	int listFiles(const std::string& ftpPath, std::string& strContent);
+
 	// 下载，ftpPath：文件在ftp的路径，localPath本地存储位置
 	int downLoad(const std::string& ftpPath, const std::string& localPath);
 
@@ -30,8 +32,14 @@ public:
 	int upLoad(const std::string& ftpPath, const std::string& localPath);
 
 private:
-	CURL* m_pCurlHandleDown;
-	CURL* m_pCurlHandleUp;
+	static size_t wirteFile(void *ptr, size_t size, size_t nmemb, void *data);
+	static size_t contentlegth(void* ptr, size_t size, size_t nmemb, void* stream);
+	static size_t discard(void* ptr, size_t size, size_t nmemb, void* stream);
+	static size_t readFile(void* ptr, size_t size, size_t nmemb, void* stream);
+
+private:
+	//CURL* m_pCurlHandleDown;
+	//CURL* m_pCurlHandleUp;
 	long m_lTimeOut;                       // 超时连接
 	long m_lTrise;                         // 连接次数
 	std::string m_strFtpName;              // ftp登录用户名，如admin
