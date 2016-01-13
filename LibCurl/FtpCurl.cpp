@@ -1,6 +1,5 @@
-#include <NetWork/FtpCurl.h>
+#include "FtpCurl.h"
 #include <curl/curl.h>
-#include <ConvTool/StringConv.h>
 
 FtpCurl::FtpCurl(void)
 {
@@ -8,14 +7,10 @@ FtpCurl::FtpCurl(void)
 	m_lTrise = 3;
 
 	curl_global_init(CURL_GLOBAL_ALL);
-// 	m_pCurlHandleDown = curl_easy_init();
-// 	m_pCurlHandleUp = curl_easy_init();
 }
 
 FtpCurl::~FtpCurl(void)
 {
-// 	curl_easy_cleanup(m_pCurlHandleDown);
-// 	curl_easy_cleanup(m_pCurlHandleUp);
 	curl_global_cleanup();
 }
 

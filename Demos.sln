@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Delegates", "Delegates\Dele
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibCurl", "LibCurl\LibCurl.vcproj", "{A0E91C69-4127-4510-A067-4FD6FD2173E1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtDrawer", "QtDrawer\QtDrawer.vcproj", "{7825120C-863D-42CE-8F88-174B65B22A45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{A0E91C69-4127-4510-A067-4FD6FD2173E1}.Debug|Win32.Build.0 = Debug|Win32
 		{A0E91C69-4127-4510-A067-4FD6FD2173E1}.Release|Win32.ActiveCfg = Release|Win32
 		{A0E91C69-4127-4510-A067-4FD6FD2173E1}.Release|Win32.Build.0 = Release|Win32
+		{7825120C-863D-42CE-8F88-174B65B22A45}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7825120C-863D-42CE-8F88-174B65B22A45}.Debug|Win32.Build.0 = Debug|Win32
+		{7825120C-863D-42CE-8F88-174B65B22A45}.Release|Win32.ActiveCfg = Release|Win32
+		{7825120C-863D-42CE-8F88-174B65B22A45}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
