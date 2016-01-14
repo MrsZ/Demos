@@ -19,9 +19,9 @@ QtDrawer::QtDrawer(QWidget *parent, Qt::WFlags flags)
 
 	initList();
 
-	connect(ui.listWidgetUnSign, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+	connect(ui.listWidgetUnSign, SIGNAL(itemClicked(QListWidgetItem*)),
 		this, SLOT(slotDoubleUnSigned(QListWidgetItem*)));
-	connect(ui.listWidgetSigned, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+	connect(ui.listWidgetSigned, SIGNAL(itemClicked(QListWidgetItem*)),
 		this, SLOT(slotDoubleSigned(QListWidgetItem*)));
 
 	connect(ui.pushButtonSave, SIGNAL(clicked()), this, SLOT(slotSave()));
