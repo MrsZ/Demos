@@ -32,4 +32,4 @@
 *.user
 
 Win32
-Delegates/GeneratedFiles
+GeneratedFiles
