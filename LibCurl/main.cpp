@@ -4,11 +4,11 @@
 int main(int argc, char **argv)
 {
 	FtpCurl curl;
-	curl.setConnect("admin", "123456", "192.168.3.98");
+	curl.setConnect("admin", "123456", "ftp://192.168.3.113/");
 	int ret = 0;
 
 	std::string strErr;
-	ret = curl.listFiles("", strErr);
+	ret = curl.downLoad("/", "D:\\list");
 	if (ret)
 	{
 		strErr = curl.getLastError();
