@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtDrawer", "QtDrawer\QtDraw
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SAPISpeak", "SAPISpeak\SAPISpeak.vcproj", "{F0A27F6E-6238-4E46-B95C-6042A3F2112E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DowmLoad", "DowmLoad\DowmLoad.vcproj", "{0CFC18DB-C37F-4EEA-AC7F-5C810F1F840B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Download", "Download\Download.vcproj", "{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,10 @@ Global
 		{F0A27F6E-6238-4E46-B95C-6042A3F2112E}.Debug|Win32.Build.0 = Debug|Win32
 		{F0A27F6E-6238-4E46-B95C-6042A3F2112E}.Release|Win32.ActiveCfg = Release|Win32
 		{F0A27F6E-6238-4E46-B95C-6042A3F2112E}.Release|Win32.Build.0 = Release|Win32
-		{0CFC18DB-C37F-4EEA-AC7F-5C810F1F840B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{0CFC18DB-C37F-4EEA-AC7F-5C810F1F840B}.Debug|Win32.Build.0 = Debug|Win32
-		{0CFC18DB-C37F-4EEA-AC7F-5C810F1F840B}.Release|Win32.ActiveCfg = Release|Win32
-		{0CFC18DB-C37F-4EEA-AC7F-5C810F1F840B}.Release|Win32.Build.0 = Release|Win32
+		{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}.Debug|Win32.Build.0 = Debug|Win32
+		{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}.Release|Win32.ActiveCfg = Release|Win32
+		{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

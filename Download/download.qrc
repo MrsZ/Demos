@@ -1,7 +1,7 @@
 <RCC>
-    <qresource prefix="/DowmLoad">
+    <qresource prefix="/Download">
+        <file>Resources/download.png</file>
         <file>Resources/fileblue.png</file>
         <file>Resources/fileyellow.png</file>
-        <file>Resources/download.png</file>
     </qresource>
 </RCC>

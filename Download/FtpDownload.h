@@ -30,6 +30,7 @@ private:
 	FtpCurl m_ftp;
 	QFileSystemModel* m_pFileModel;
 	QString m_strDownloadDir;
+	QString m_strRemoteDir;
 	std::vector<DownInfo*> m_vecInfo;
 };
 

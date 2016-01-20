@@ -2,7 +2,7 @@
 // File: FtpCurl.h
 // Author:lyk
 // Date: 2016/01/08
-// Desc:
+// Desc: Ftp服务上传下载功能
 //
 #ifndef FTPCURL_H
 #define FTPCURL_H

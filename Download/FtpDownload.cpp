@@ -64,6 +64,8 @@ void FtpDownload::slotDownload(QTreeWidgetItem* item)
 {
 	if (item->childCount() > 0)
 	{
+		m_strRemoteDir = item->data(0, Qt::UserRole).toString();
+		m_strRemoteDir.append("/");
 		return;
 	}
 	DownloadThread* thr = new DownloadThread;
@@ -73,7 +75,7 @@ void FtpDownload::slotDownload(QTreeWidgetItem* item)
 	QString strName = item->data(0, Qt::UserRole).toString();
 	int nPos = strName.lastIndexOf("/");
 	strName = strName.right(strName.length() - nPos);
-	QString strLoacal =m_strDownloadDir;
+	QString strLoacal = m_strDownloadDir;
 	strLoacal.append(strName);
 	DownInfo* pInfo = new DownInfo;
 	pInfo->down = true;
@@ -86,6 +88,7 @@ void FtpDownload::slotDownload(QTreeWidgetItem* item)
 	strContent.append(strName).append("              到 ").append(strLoacal);
 	ui.textEdit->append(strContent);
 	m_vecInfo.push_back(pInfo);
+	connect(thr, SIGNAL(finished()), thr, SLOT(deleteLater()));
 	thr->start();
 }
 
@@ -155,7 +158,7 @@ void FtpDownload::initFileList(const QString& ftpPath, QTreeWidgetItem* item)
 
 		if (size == 0)
 		{
-			pItem->setIcon(0, QIcon(":/DowmLoad/Resources/fileyellow.png"));
+			pItem->setIcon(0, QIcon(":/Download/Resources/fileblue.png"));
 			initFileList(ftpPath + strName + "/", pItem);
 		}
 		else
@@ -180,7 +183,7 @@ void FtpDownload::initFileList(const QString& ftpPath, QTreeWidgetItem* item)
 				size = size / 1024.0 / 1024.0 / 1024.0;
 				strSize = QString("Gb");
 			}
-			pItem->setIcon(0, QIcon(":/DowmLoad/Resources/download.png"));
+			pItem->setIcon(0, QIcon(":/Download/Resources/download.png"));
 			pItem->setText(1, QString::number(size, 'g', 4).append(strSize));        // 大小
 		}
 		pItem->setText(2, list.at(5) + " " + list.at(6) + " " + list.at(7));        // 日期
@@ -192,7 +195,29 @@ void FtpDownload::initFileList(const QString& ftpPath, QTreeWidgetItem* item)
 
 void FtpDownload::slotCurrent( const QModelIndex& index )
 {
-	m_strDownloadDir = m_pFileModel->filePath(index);
+	if (m_pFileModel->isDir(index))
+	{
+		m_strDownloadDir = m_pFileModel->filePath(index);
+	}
+	else
+	{
+		QString strup = m_pFileModel->filePath(index);
+		DownloadThread* thr = new DownloadThread;
+		thr->m_pFtp->setConnect(ui.lineEditUser->text().toStdString(),
+			ui.lineEditPassw->text().toStdString(),
+			ui.lineEditIp->text().toStdString());
+
+		QString strRemote = m_strRemoteDir;
+		strRemote.append(m_pFileModel->fileName(index));
+		thr->downLoad(strRemote.toLocal8Bit().data(),
+			strup.toLocal8Bit().data(), false);
+
+		QString strContent = QString(tr("正在上传 "));
+		strContent.append(strup).append(tr("              到 ")).append(m_strRemoteDir);
+		ui.textEdit->append(strContent);
+		connect(thr, SIGNAL(finished()), thr, SLOT(deleteLater()));
+		thr->start();
+	}
 }
 
 void FtpDownload::slotProcessFtpInfo()
