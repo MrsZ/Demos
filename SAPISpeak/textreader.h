@@ -24,6 +24,8 @@ public:
 	void resume();
 	void setVolume(int voice);
 
+	void showEvent(QShowEvent* event);
+
 private slots:
 	void slotSpeak();
 	void slotComboBox();

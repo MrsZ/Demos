@@ -109,3 +109,8 @@ void TextReader::slotComboBox()
 	m_pVoice->SetVoice(pToken);
 	m_state = PalyState::NO_STATE;
 }
+
+void TextReader::showEvent( QShowEvent* event )
+{
+
+}
