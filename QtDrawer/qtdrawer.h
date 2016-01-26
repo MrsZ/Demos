@@ -1,7 +1,7 @@
 #ifndef QTDRAWER_H
 #define QTDRAWER_H
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include "ui_qtdrawer.h"
 #include "DrawAreaWidget.h"
 
@@ -10,7 +10,7 @@ class QtDrawer : public QMainWindow
 	Q_OBJECT
 
 public:
-	QtDrawer(QWidget *parent = 0, Qt::WFlags flags = 0);
+	QtDrawer(QWidget *parent = 0);
 	~QtDrawer();
 
 private slots:

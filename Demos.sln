@@ -1,15 +1,17 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Delegates", "Delegates\Delegates.vcproj", "{EF53AD4B-9BEB-48E0-81FB-DD973083E8F6}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Delegates", "Delegates\Delegates.vcxproj", "{EF53AD4B-9BEB-48E0-81FB-DD973083E8F6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibCurl", "LibCurl\LibCurl.vcproj", "{A0E91C69-4127-4510-A067-4FD6FD2173E1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibCurl", "LibCurl\LibCurl.vcxproj", "{A0E91C69-4127-4510-A067-4FD6FD2173E1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtDrawer", "QtDrawer\QtDrawer.vcproj", "{7825120C-863D-42CE-8F88-174B65B22A45}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtDrawer", "QtDrawer\QtDrawer.vcxproj", "{7825120C-863D-42CE-8F88-174B65B22A45}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SAPISpeak", "SAPISpeak\SAPISpeak.vcproj", "{F0A27F6E-6238-4E46-B95C-6042A3F2112E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SAPISpeak", "SAPISpeak\SAPISpeak.vcxproj", "{F0A27F6E-6238-4E46-B95C-6042A3F2112E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Download", "Download\Download.vcproj", "{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Download", "Download\Download.vcxproj", "{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,5 +42,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = $(DefaultQtVersion)
 	EndGlobalSection
 EndGlobal

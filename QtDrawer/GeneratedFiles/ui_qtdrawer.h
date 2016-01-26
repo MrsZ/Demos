@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'qtdrawer.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,17 +10,17 @@
 #define UI_QTDRAWER_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QListWidget>
-#include <QtGui/QMainWindow>
-#include <QtGui/QPushButton>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -49,34 +49,34 @@ public:
     void setupUi(QMainWindow *QtDrawerClass)
     {
         if (QtDrawerClass->objectName().isEmpty())
-            QtDrawerClass->setObjectName(QString::fromUtf8("QtDrawerClass"));
+            QtDrawerClass->setObjectName(QStringLiteral("QtDrawerClass"));
         QtDrawerClass->resize(840, 500);
         centralWidget = new QWidget(QtDrawerClass);
-        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
         horizontalLayout->setSpacing(0);
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setSpacing(0);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         label_2 = new QLabel(centralWidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setMinimumSize(QSize(160, 30));
         QFont font;
         font.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
         font.setPointSize(14);
         label_2->setFont(font);
-        label_2->setStyleSheet(QString::fromUtf8("color: rgb(170, 0, 0);"));
+        label_2->setStyleSheet(QStringLiteral("color: rgb(170, 0, 0);"));
         label_2->setAlignment(Qt::AlignCenter);
 
         verticalLayout_4->addWidget(label_2);
 
         listWidgetUnSign = new QListWidget(centralWidget);
-        listWidgetUnSign->setObjectName(QString::fromUtf8("listWidgetUnSign"));
+        listWidgetUnSign->setObjectName(QStringLiteral("listWidgetUnSign"));
         listWidgetUnSign->setMinimumSize(QSize(160, 0));
         listWidgetUnSign->setMaximumSize(QSize(160, 16777215));
-        listWidgetUnSign->setStyleSheet(QString::fromUtf8("QListWidget::item{height:35px;}\n"
+        listWidgetUnSign->setStyleSheet(QLatin1String("QListWidget::item{height:35px;}\n"
 ""));
         listWidgetUnSign->setIconSize(QSize(32, 32));
 
@@ -86,39 +86,39 @@ public:
         horizontalLayout->addLayout(verticalLayout_4);
 
         widget = new QWidget(centralWidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setObjectName(QStringLiteral("widget"));
         widget->setMinimumSize(QSize(500, 500));
-        widget->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0);"));
+        widget->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
 
         horizontalLayout->addWidget(widget);
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(0);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 6, 0, -1);
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setSpacing(0);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         label_3 = new QLabel(centralWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setMinimumSize(QSize(160, 30));
         label_3->setFont(font);
-        label_3->setStyleSheet(QString::fromUtf8("color: rgb(0, 85, 0);"));
+        label_3->setStyleSheet(QStringLiteral("color: rgb(0, 85, 0);"));
         label_3->setAlignment(Qt::AlignCenter);
 
         verticalLayout_5->addWidget(label_3);
 
         listWidgetSigned = new QListWidget(centralWidget);
-        listWidgetSigned->setObjectName(QString::fromUtf8("listWidgetSigned"));
+        listWidgetSigned->setObjectName(QStringLiteral("listWidgetSigned"));
         listWidgetSigned->setMinimumSize(QSize(160, 0));
         listWidgetSigned->setMaximumSize(QSize(160, 16777215));
-        listWidgetSigned->setStyleSheet(QString::fromUtf8("QListWidget::item{height:35px;}\n"
+        listWidgetSigned->setStyleSheet(QLatin1String("QListWidget::item{height:35px;}\n"
 ""));
 
         verticalLayout_5->addWidget(listWidgetSigned);
@@ -128,9 +128,9 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(0);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         label = new QLabel(centralWidget);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
         label->setMinimumSize(QSize(60, 0));
         label->setMaximumSize(QSize(60, 40));
         label->setFont(font);
@@ -138,10 +138,10 @@ public:
         horizontalLayout_2->addWidget(label);
 
         pushButtonColor = new QPushButton(centralWidget);
-        pushButtonColor->setObjectName(QString::fromUtf8("pushButtonColor"));
+        pushButtonColor->setObjectName(QStringLiteral("pushButtonColor"));
         pushButtonColor->setMinimumSize(QSize(60, 40));
         pushButtonColor->setMaximumSize(QSize(60, 16777215));
-        pushButtonColor->setStyleSheet(QString::fromUtf8("background-color: rgba(255,128,0,200);"));
+        pushButtonColor->setStyleSheet(QStringLiteral("background-color: rgba(255,128,0,200);"));
 
         horizontalLayout_2->addWidget(pushButtonColor);
 
@@ -149,7 +149,7 @@ public:
         verticalLayout->addLayout(horizontalLayout_2);
 
         pushButtonReDraw = new QPushButton(centralWidget);
-        pushButtonReDraw->setObjectName(QString::fromUtf8("pushButtonReDraw"));
+        pushButtonReDraw->setObjectName(QStringLiteral("pushButtonReDraw"));
         pushButtonReDraw->setMinimumSize(QSize(160, 40));
         pushButtonReDraw->setMaximumSize(QSize(120, 16777215));
         pushButtonReDraw->setFont(font);
@@ -157,7 +157,7 @@ public:
         verticalLayout->addWidget(pushButtonReDraw);
 
         pushButtonSave = new QPushButton(centralWidget);
-        pushButtonSave->setObjectName(QString::fromUtf8("pushButtonSave"));
+        pushButtonSave->setObjectName(QStringLiteral("pushButtonSave"));
         pushButtonSave->setMinimumSize(QSize(160, 40));
         pushButtonSave->setMaximumSize(QSize(120, 16777215));
         pushButtonSave->setFont(font);
@@ -165,7 +165,7 @@ public:
         verticalLayout->addWidget(pushButtonSave);
 
         pushButtonExit = new QPushButton(centralWidget);
-        pushButtonExit->setObjectName(QString::fromUtf8("pushButtonExit"));
+        pushButtonExit->setObjectName(QStringLiteral("pushButtonExit"));
         pushButtonExit->setMinimumSize(QSize(160, 40));
         pushButtonExit->setMaximumSize(QSize(120, 16777215));
         pushButtonExit->setFont(font);
@@ -190,14 +190,14 @@ public:
 
     void retranslateUi(QMainWindow *QtDrawerClass)
     {
-        QtDrawerClass->setWindowTitle(QApplication::translate("QtDrawerClass", "QtDrawer", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("QtDrawerClass", "\346\234\252\347\255\276\345\210\260", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("QtDrawerClass", "\345\267\262\347\255\276\345\210\260", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("QtDrawerClass", "\351\242\234 \350\211\262", 0, QApplication::UnicodeUTF8));
+        QtDrawerClass->setWindowTitle(QApplication::translate("QtDrawerClass", "QtDrawer", 0));
+        label_2->setText(QApplication::translate("QtDrawerClass", "\346\234\252\347\255\276\345\210\260", 0));
+        label_3->setText(QApplication::translate("QtDrawerClass", "\345\267\262\347\255\276\345\210\260", 0));
+        label->setText(QApplication::translate("QtDrawerClass", "\351\242\234 \350\211\262", 0));
         pushButtonColor->setText(QString());
-        pushButtonReDraw->setText(QApplication::translate("QtDrawerClass", "\351\207\215\345\206\231", 0, QApplication::UnicodeUTF8));
-        pushButtonSave->setText(QApplication::translate("QtDrawerClass", "\345\256\214\346\210\220", 0, QApplication::UnicodeUTF8));
-        pushButtonExit->setText(QApplication::translate("QtDrawerClass", "\351\200\200\345\207\272", 0, QApplication::UnicodeUTF8));
+        pushButtonReDraw->setText(QApplication::translate("QtDrawerClass", "\351\207\215\345\206\231", 0));
+        pushButtonSave->setText(QApplication::translate("QtDrawerClass", "\345\256\214\346\210\220", 0));
+        pushButtonExit->setText(QApplication::translate("QtDrawerClass", "\351\200\200\345\207\272", 0));
     } // retranslateUi
 
 };

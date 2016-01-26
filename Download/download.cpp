@@ -1,7 +1,7 @@
 #include "download.h"
 
-Download::Download(QWidget *parent, Qt::WFlags flags)
-	: QMainWindow(parent, flags)
+Download::Download(QWidget *parent)
+	: QMainWindow(parent)
 {
 	ui.setupUi(this);
 	init();

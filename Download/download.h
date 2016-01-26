@@ -1,7 +1,7 @@
 #ifndef DOWNLOAD_H
 #define DOWNLOAD_H
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include "ui_download.h"
 #include "FtpDownload.h"
 #include "HttpDownload.h"
@@ -11,7 +11,7 @@ class Download : public QMainWindow
 	Q_OBJECT
 
 public:
-	Download(QWidget *parent = 0, Qt::WFlags flags = 0);
+	Download(QWidget *parent = 0);
 	~Download();
 
 private:

@@ -1,4 +1,4 @@
-#include <QtGui/QApplication>
+#include <QApplication>
 #include "Widget.h"
 
 int main(int argc, char *argv[])

@@ -6,8 +6,8 @@
 #include <QMessageBox>
 #include "FileUtils.h"
 
-QtDrawer::QtDrawer(QWidget *parent, Qt::WFlags flags)
-	: QMainWindow(parent, flags)
+QtDrawer::QtDrawer(QWidget *parent)
+	: QMainWindow(parent)
 {
 	ui.setupUi(this);
 	m_pDraw = new DrawAreaWidget(ui.widget);

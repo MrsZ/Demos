@@ -1,4 +1,6 @@
 #include "textreader.h"
+#include <QString>
+#include "QtCore/qstring.h"
 
 TextReader::TextReader(QWidget* parent/* = 0*/)
 : QWidget(parent)
@@ -50,7 +52,7 @@ void TextReader::init()
 		m_pSpTokens->Item(i, &pToken);
 		WCHAR* pChar;
 		pToken->GetId(&pChar);
-		QString name = QString::fromWCharArray(pChar);
+		QString name;// = QString::fromWCharArray(pChar);
 		ui.comboBox->addItem(name);
 	}
 }
@@ -61,7 +63,7 @@ void TextReader::slotSpeak()
 	{
 	case NO_STATE:
 		{
-			speak(ui.textEdit->toPlainText().toStdWString(), true);
+			//speak(ui.textEdit->toPlainText().toStdWString(), true);
 
 			ui.pushButton->setText(QString::fromLocal8Bit("ÔÝÍ£"));
 			m_state = PalyState::PALYING;

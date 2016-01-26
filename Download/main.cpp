@@ -1,5 +1,5 @@
 #include "download.h"
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QTextCodec>
 
 int main(int argc, char *argv[])

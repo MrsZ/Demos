@@ -27,9 +27,11 @@
 *.out
 *.app
 
+# vcproject
 *.ncb
 *.suo
 *.user
+*.sdf
 
 Win32
 GeneratedFiles
