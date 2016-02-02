@@ -30,6 +30,9 @@ public:
 	// 上传，ftpPath：文件在ftp的路径，localPath本地存储位置
 	int upLoad(const std::string& ftpPath, const std::string& localPath);
 
+	// 删除，ftpPath：文件在ftp的路径
+	int deleteFile(const std::string& ftpPath);
+
 private:
 	static size_t wirteFile(void *ptr, size_t size, size_t nmemb, void *data);
 	static size_t contentlegth(void* ptr, size_t size, size_t nmemb, void* stream);

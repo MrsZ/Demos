@@ -32,6 +32,8 @@
 *.suo
 *.user
 *.sdf
+*.opensdf
 
 Win32
 GeneratedFiles
+QtDrawer/GeneratedFiles

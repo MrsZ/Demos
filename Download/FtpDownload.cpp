@@ -5,6 +5,10 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QTimer>
+#include <QMenu>
+#include <QAction>
+#include <QFileIconProvider>
+#include <QTemporaryFile>
 #include "FileUtils.h"
 #include "DownloadThread.h"
 
@@ -17,10 +21,17 @@ FtpDownload::FtpDownload(QWidget *parent)
 	m_strDownloadDir = FileUtils::ins()->getDataPathQString();
 	m_pFileModel = new QFileSystemModel;
 	m_pFileModel->setRootPath("");
+
+	ui.treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+
+	ui.treeWidget->setColumnWidth(0, 480);
+	ui.treeViewDownload->setColumnWidth(0, 480);
+
 	ui.treeViewDownload->setAnimated(false);
 	ui.treeViewDownload->setIndentation(20);
 	ui.treeViewDownload->setSortingEnabled(true);
 	ui.treeViewDownload->setModel(m_pFileModel);
+
 	ui.lineEditPassw->setEchoMode(QLineEdit::Password);
 	connect(ui.pushButtonOpen, SIGNAL(clicked()), this, SLOT(slotConnect()));
 	connect(ui.pushButtonUp, SIGNAL(clicked()), this, SLOT(slotUpload()));
@@ -29,6 +40,9 @@ FtpDownload::FtpDownload(QWidget *parent)
 		this, SLOT(slotDownload(QTreeWidgetItem*)));
 	connect(ui.treeViewDownload, SIGNAL(doubleClicked(const QModelIndex&)),
 		this,SLOT(slotCurrent(const QModelIndex&)));
+
+	connect(ui.treeWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
+		this, SLOT(slotCustomContextMenuRequested(const QPoint&)));
 
 // 	QTimer *timer = new QTimer(this);
 // 	connect(timer, SIGNAL(timeout()), this, SLOT(slotProcessFtpInfo()));
@@ -125,18 +139,17 @@ void FtpDownload::initFileList(const QString& ftpPath, QTreeWidgetItem* item)
 
 	QFile file(strPath);
 	QString strContent;
-	if (file.open(QIODevice::ReadOnly))
+	if (!file.open(QIODevice::ReadOnly))
 	{
-		QTextStream stream(&file);  
-		stream.setCodec(QTextCodec::codecForName("GBK"));
-		strContent = stream.readAll();
+		return;
 	}
 
 	QStringList fileList = strContent.split("\r\n");
 	int i = 0;
 	QTreeWidgetItem* pItem = NULL;
-	foreach (QString str, fileList)
+	while (!file.atEnd())
 	{
+		QString str = QString::fromUtf8(file.readLine().data());
 		str = str.simplified();
 		QStringList list = str.split(" ");
 		if(list.size() < 9)
@@ -158,7 +171,8 @@ void FtpDownload::initFileList(const QString& ftpPath, QTreeWidgetItem* item)
 
 		if (size == 0)
 		{
-			pItem->setIcon(0, QIcon(":/Download/Resources/fileblue.png"));
+			QFileIconProvider iconProvider;
+			pItem->setIcon(0, iconProvider.icon(QFileIconProvider::Folder));
 			initFileList(ftpPath + strName + "/", pItem);
 		}
 		else
@@ -245,5 +259,64 @@ void FtpDownload::slotProcessFtpInfo()
 
 		ui.textEdit->append(strContent);
 		++i;
+	}
+}
+
+void FtpDownload::slotCustomContextMenuRequested(const QPoint& pos)
+{
+	QTreeWidgetItem* pItem = ui.treeWidget->itemAt(pos);
+	if (pItem == NULL || pItem->childCount() > 0)
+	{
+		return;
+	}
+
+	QMenu* pMenu = new QMenu(this);
+
+	QAction* pActionDel = new QAction(QStringLiteral("É¾³ý"), this);
+	connect(pActionDel, SIGNAL(triggered()), this, SLOT(slotDeleteFile()));
+
+	pMenu->addAction(pActionDel);
+	pMenu->exec(QCursor::pos());
+}
+
+QIcon FtpDownload::fileExtensionIcon(const QString& name)
+{
+	QIcon icon;
+	if (name.isEmpty())
+	{
+		return icon;
+	}
+	int nPos = name.lastIndexOf('.');
+	if (nPos == -1)
+	{
+		return icon;
+	}
+
+	QString strExt = name.mid(nPos);
+	QFileIconProvider iconProvider;
+	QString fileName = FileUtils::ins()->getDataPathQString("temp").append(strExt);
+	QFile tempFile(fileName);
+	//tempFile.setAutoRemove(false);
+
+	if (tempFile.open(QIODevice::WriteOnly))
+	{
+		QString file_name = tempFile.fileName();
+		tempFile.write(QByteArray());
+		tempFile.close();
+
+		icon = iconProvider.icon(QFileInfo(file_name));
+		tempFile.remove();
+	}
+
+	return icon;
+}
+
+void FtpDownload::slotDeleteFile()
+{
+	QTreeWidgetItem* pItem = ui.treeWidget->currentItem();
+	if (pItem)
+	{
+		QString str = pItem->data(0, Qt::UserRole).toString();
+		m_ftp.deleteFile(str.toLocal8Bit().data());
 	}
 }

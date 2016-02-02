@@ -21,9 +21,12 @@ private slots:
 	void slotConnect();
 	void slotCurrent(const QModelIndex& index);
 	void slotProcessFtpInfo();
+	void slotCustomContextMenuRequested(const QPoint& pos);
+	void slotDeleteFile();
 
 private:
 	void initFileList(const QString& ftpPath, QTreeWidgetItem* item);
+	QIcon fileExtensionIcon(const QString& name);
 
 private:
 	Ui::FtpDownload ui;

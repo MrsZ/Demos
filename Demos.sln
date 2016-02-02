@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SAPISpeak", "SAPISpeak\SAPI
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Download", "Download\Download.vcxproj", "{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OSGDemo", "OSGDemo\OSGDemo.vcxproj", "{66D27484-7BDF-4C77-B0B7-6AE16422BD55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +41,10 @@ Global
 		{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}.Debug|Win32.Build.0 = Debug|Win32
 		{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}.Release|Win32.ActiveCfg = Release|Win32
 		{0DB57CFA-F4D3-473A-9B50-6B9B9D79D691}.Release|Win32.Build.0 = Release|Win32
+		{66D27484-7BDF-4C77-B0B7-6AE16422BD55}.Debug|Win32.ActiveCfg = Debug|Win32
+		{66D27484-7BDF-4C77-B0B7-6AE16422BD55}.Debug|Win32.Build.0 = Debug|Win32
+		{66D27484-7BDF-4C77-B0B7-6AE16422BD55}.Release|Win32.ActiveCfg = Release|Win32
+		{66D27484-7BDF-4C77-B0B7-6AE16422BD55}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
