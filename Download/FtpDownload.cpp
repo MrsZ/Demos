@@ -83,20 +83,17 @@ void FtpDownload::slotDownload(QTreeWidgetItem* item)
 		return;
 	}
 	DownloadThread* thr = new DownloadThread;
-	thr->m_pFtp->setConnect(ui.lineEditUser->text().toStdString(),
-		ui.lineEditPassw->text().toStdString(),
-		ui.lineEditIp->text().toStdString());
+	thr->m_pFtp = &m_ftp;
 	QString strName = item->data(0, Qt::UserRole).toString();
 	int nPos = strName.lastIndexOf("/");
 	strName = strName.right(strName.length() - nPos);
 	QString strLoacal = m_strDownloadDir;
 	strLoacal.append(strName);
 	DownInfo* pInfo = new DownInfo;
-	pInfo->down = true;
 	pInfo->name = strName.toLocal8Bit().data();
 	thr->m_pFtp->setProcess(pInfo);
 	thr->downLoad(item->data(0, Qt::UserRole).toString().toLocal8Bit().data(),
-		strLoacal.toLocal8Bit().data());
+		strLoacal.toLocal8Bit().data(), DownloadThread::FTP_DOWNLOAD);
 
 	QString strContent = QString("正在下载 ");
 	strContent.append(strName).append("              到 ").append(strLoacal);
@@ -217,14 +214,12 @@ void FtpDownload::slotCurrent( const QModelIndex& index )
 	{
 		QString strup = m_pFileModel->filePath(index);
 		DownloadThread* thr = new DownloadThread;
-		thr->m_pFtp->setConnect(ui.lineEditUser->text().toStdString(),
-			ui.lineEditPassw->text().toStdString(),
-			ui.lineEditIp->text().toStdString());
+		thr->m_pFtp = &m_ftp;
 
 		QString strRemote = m_strRemoteDir;
 		strRemote.append(m_pFileModel->fileName(index));
 		thr->downLoad(strRemote.toLocal8Bit().data(),
-			strup.toLocal8Bit().data(), false);
+			strup.toLocal8Bit().data(), DownloadThread::FTP_DOWNLOAD);
 
 		QString strContent = QString(tr("正在上传 "));
 		strContent.append(strup).append(tr("              到 ")).append(m_strRemoteDir);
@@ -317,6 +312,10 @@ void FtpDownload::slotDeleteFile()
 	if (pItem)
 	{
 		QString str = pItem->data(0, Qt::UserRole).toString();
-		m_ftp.deleteFile(str.toLocal8Bit().data());
+		DownloadThread* thr = new DownloadThread;
+		thr->m_pFtp = &m_ftp;
+		thr->downLoad(str.toLocal8Bit().data(), "", DownloadThread::FTP_DELETE);
+		connect(thr, SIGNAL(finished()), thr, SLOT(deleteLater()));
+		thr->start();
 	}
 }
