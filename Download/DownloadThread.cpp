@@ -9,7 +9,7 @@ DownloadThread::DownloadThread(QObject *parent)
 
 DownloadThread::~DownloadThread()
 {
-	delete m_pFtp;
+	
 }
 
 void DownloadThread::run()

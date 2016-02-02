@@ -95,8 +95,9 @@ void FtpDownload::slotDownload(QTreeWidgetItem* item)
 	thr->downLoad(item->data(0, Qt::UserRole).toString().toLocal8Bit().data(),
 		strLoacal.toLocal8Bit().data(), DownloadThread::FTP_DOWNLOAD);
 
-	QString strContent = QString("正在下载 ");
-	strContent.append(strName).append("              到 ").append(strLoacal);
+	QString strContent = QString(QStringLiteral("正在下载 "));
+	strContent.append(strName).append(QStringLiteral("              到 "))
+		.append(strLoacal);
 	ui.textEdit->append(strContent);
 	m_vecInfo.push_back(pInfo);
 	connect(thr, SIGNAL(finished()), thr, SLOT(deleteLater()));
@@ -107,7 +108,7 @@ void FtpDownload::slotUpload()
 {
 	QStringList files = QFileDialog::getOpenFileNames(
 		this,
-		tr("选择文档"),
+		QStringLiteral("选择文档"),
 		"",
 		"Document (*.doc *.docx *.xls *.xlsx *.ppt *.pptx *.pdf)");
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -221,8 +222,9 @@ void FtpDownload::slotCurrent( const QModelIndex& index )
 		thr->downLoad(strRemote.toLocal8Bit().data(),
 			strup.toLocal8Bit().data(), DownloadThread::FTP_DOWNLOAD);
 
-		QString strContent = QString(tr("正在上传 "));
-		strContent.append(strup).append(tr("              到 ")).append(m_strRemoteDir);
+		QString strContent = QString(QStringLiteral("正在上传 "));
+		strContent.append(strup).append(QStringLiteral("              到 "))
+			.append(m_strRemoteDir);
 		ui.textEdit->append(strContent);
 		connect(thr, SIGNAL(finished()), thr, SLOT(deleteLater()));
 		thr->start();
@@ -241,11 +243,11 @@ void FtpDownload::slotProcessFtpInfo()
 		QString strContent;
 		if (iter->down)
 		{
-			strContent = QString(tr("正在下载 "));
+			strContent = QString(QStringLiteral("正在下载 "));
 		}
 		else
 		{
-			strContent = QString(tr("正在上传 "));
+			strContent = QString(QStringLiteral("正在上传 "));
 		}
 		strContent.append(QString::fromStdString(iter->name));
 		strContent.append(" ");
