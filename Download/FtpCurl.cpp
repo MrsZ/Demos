@@ -236,3 +236,44 @@ int FtpCurl::deleteFile(const std::string& ftpPath)
 	curl_easy_cleanup(pCurlHandleDel);
 	return ret;
 }
+
+int FtpCurl::rename(const std::string& ftpPath, const std::string& newFtpPath)
+{
+	int ret = 0;
+
+	// 获取文件在服务器的位置信息，格式如：ftp://admin:123456@192.168.3.91/1111.doc
+	std::string strUser = m_strFtpName;
+	strUser.append(":");
+	strUser.append(m_strFtpPassword);
+
+	std::string strIP = m_strFtpIPAddress;
+	strIP.append(ftpPath);
+
+	CURL* pCurlHandle = curl_easy_init();
+	curl_easy_setopt(pCurlHandle, CURLOPT_URL, strIP.c_str());
+	curl_easy_setopt(pCurlHandle, CURLOPT_USERPWD, strUser.c_str());
+
+	curl_easy_setopt(pCurlHandle, CURLOPT_WRITEFUNCTION, FtpCurl::discard);
+	curl_easy_setopt(pCurlHandle, CURLOPT_HEADERFUNCTION, FtpCurl::contentlegth);
+
+	std::string strFile = "RNFR ";
+	strFile.append(ftpPath);
+	struct curl_slist *slist = NULL;
+	slist = curl_slist_append(slist, strFile.c_str());
+
+	strFile = "RNTO ";
+	strFile.append(newFtpPath);
+	slist = curl_slist_append(slist, strFile.c_str());
+	curl_easy_setopt(pCurlHandle, CURLOPT_POSTQUOTE, slist);
+
+	CURLcode r = curl_easy_perform(pCurlHandle);
+	if (CURLE_OK != r)
+	{
+		ret = -1;
+		m_strLastErrot = curl_easy_strerror(r);
+	}
+
+	curl_slist_free_all(slist);
+	curl_easy_cleanup(pCurlHandle);
+	return ret;
+}

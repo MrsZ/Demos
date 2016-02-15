@@ -1,4 +1,4 @@
-#include "FtpDownload.h"
+ï»¿#include "FtpDownload.h"
 #include <QFile>
 #include <QUrl>
 #include <QTextCodec>
@@ -95,8 +95,8 @@ void FtpDownload::slotDownload(QTreeWidgetItem* item)
 	thr->downLoad(item->data(0, Qt::UserRole).toString().toLocal8Bit().data(),
 		strLoacal.toLocal8Bit().data(), DownloadThread::FTP_DOWNLOAD);
 
-	QString strContent = QString(QStringLiteral("ÕýÔÚÏÂÔØ "));
-	strContent.append(strName).append(QStringLiteral("              µ½ "))
+	QString strContent = QString(QStringLiteral("æ­£åœ¨ä¸‹è½½ "));
+	strContent.append(strName).append(QStringLiteral("              åˆ° "))
 		.append(strLoacal);
 	ui.textEdit->append(strContent);
 	m_vecInfo.push_back(pInfo);
@@ -108,7 +108,7 @@ void FtpDownload::slotUpload()
 {
 	QStringList files = QFileDialog::getOpenFileNames(
 		this,
-		QStringLiteral("Ñ¡ÔñÎÄµµ"),
+		QStringLiteral("é€‰æ‹©æ–‡æ¡£"),
 		"",
 		"Document (*.doc *.docx *.xls *.xlsx *.ppt *.pptx *.pdf)");
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -162,7 +162,7 @@ void FtpDownload::initFileList(const QString& ftpPath, QTreeWidgetItem* item)
 		{
 			strName.append(" ").append(list.at(j));
 		}
-		pItem->setText(0, strName);         // Ãû³Æ
+		pItem->setText(0, strName);         // åç§°
 		pItem->setData(0, Qt::UserRole, ftpPath + strName);
 
 		float size = list.at(4).toFloat();
@@ -196,9 +196,9 @@ void FtpDownload::initFileList(const QString& ftpPath, QTreeWidgetItem* item)
 				strSize = QString("Gb");
 			}
 			pItem->setIcon(0, QIcon(":/Download/Resources/download.png"));
-			pItem->setText(1, QString::number(size, 'g', 4).append(strSize));        // ´óÐ¡
+			pItem->setText(1, QString::number(size, 'g', 4).append(strSize));        // å¤§å°
 		}
-		pItem->setText(2, list.at(5) + " " + list.at(6) + " " + list.at(7));        // ÈÕÆÚ
+		pItem->setText(2, list.at(5) + " " + list.at(6) + " " + list.at(7));        // æ—¥æœŸ
 
 		item->addChild(pItem);
 		++i;
@@ -222,8 +222,8 @@ void FtpDownload::slotCurrent( const QModelIndex& index )
 		thr->downLoad(strRemote.toLocal8Bit().data(),
 			strup.toLocal8Bit().data(), DownloadThread::FTP_DOWNLOAD);
 
-		QString strContent = QString(QStringLiteral("ÕýÔÚÉÏ´« "));
-		strContent.append(strup).append(QStringLiteral("              µ½ "))
+		QString strContent = QString(QStringLiteral("æ­£åœ¨ä¸Šä¼  "));
+		strContent.append(strup).append(QStringLiteral("              åˆ° "))
 			.append(m_strRemoteDir);
 		ui.textEdit->append(strContent);
 		connect(thr, SIGNAL(finished()), thr, SLOT(deleteLater()));
@@ -243,11 +243,11 @@ void FtpDownload::slotProcessFtpInfo()
 		QString strContent;
 		if (iter->down)
 		{
-			strContent = QString(QStringLiteral("ÕýÔÚÏÂÔØ "));
+			strContent = QString(QStringLiteral("æ­£åœ¨ä¸‹è½½ "));
 		}
 		else
 		{
-			strContent = QString(QStringLiteral("ÕýÔÚÉÏ´« "));
+			strContent = QString(QStringLiteral("æ­£åœ¨ä¸Šä¼  "));
 		}
 		strContent.append(QString::fromStdString(iter->name));
 		strContent.append(" ");
@@ -269,10 +269,14 @@ void FtpDownload::slotCustomContextMenuRequested(const QPoint& pos)
 
 	QMenu* pMenu = new QMenu(this);
 
-	QAction* pActionDel = new QAction(QStringLiteral("É¾³ý"), this);
+	QAction* pActionDel = new QAction(QStringLiteral("åˆ é™¤"), this);
 	connect(pActionDel, SIGNAL(triggered()), this, SLOT(slotDeleteFile()));
 
+	QAction* pActionRename = new QAction(QStringLiteral("é‡å‘½å"), this);
+	connect(pActionRename, SIGNAL(triggered()), this, SLOT(slotRenameFile()));
+
 	pMenu->addAction(pActionDel);
+	pMenu->addAction(pActionRename);
 	pMenu->exec(QCursor::pos());
 }
 
@@ -317,6 +321,40 @@ void FtpDownload::slotDeleteFile()
 		DownloadThread* thr = new DownloadThread;
 		thr->m_pFtp = &m_ftp;
 		thr->downLoad(str.toLocal8Bit().data(), "", DownloadThread::FTP_DELETE);
+		connect(thr, SIGNAL(finished()), thr, SLOT(deleteLater()));
+		thr->start();
+	}
+}
+
+void FtpDownload::slotRenameFile()
+{
+	QTreeWidgetItem* pItem = ui.treeWidget->currentItem();
+	if (pItem)
+	{
+		m_strOldName = pItem->data(0, Qt::UserRole).toString();
+		pItem->setFlags(pItem->flags() | Qt::ItemIsEditable);
+		ui.treeWidget->editItem(pItem, 0);
+		connect(ui.treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*, int)),
+			this, SLOT(slotRenameFile(QTreeWidgetItem*, int)));
+	}
+}
+
+void FtpDownload::slotRenameFile(QTreeWidgetItem* item, int column)
+{
+	disconnect(ui.treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*, int)),
+		this, SLOT(slotRenameFile(QTreeWidgetItem*, int)));
+	item->setFlags(item->flags()&~(Qt::ItemIsEditable));
+	if (m_strOldName.compare(item->text(0)) != 0)
+	{
+		QString strOld = item->data(0, Qt::UserRole).toString();
+		int iPos = strOld.lastIndexOf("/");
+		QString strNew = strOld.left(iPos + 1);
+		strNew.append(item->text(0));
+		item->setData(0, Qt::UserRole, strNew);
+		DownloadThread* thr = new DownloadThread;
+		thr->m_pFtp = &m_ftp;
+		thr->downLoad(strOld.toLocal8Bit().data(),
+			strNew.toLocal8Bit().data(), DownloadThread::FTP_RENAME);
 		connect(thr, SIGNAL(finished()), thr, SLOT(deleteLater()));
 		thr->start();
 	}

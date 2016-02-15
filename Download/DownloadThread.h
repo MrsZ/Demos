@@ -16,6 +16,7 @@ public:
 		FTP_DOWNLOAD,
 		FTP_UPLOAD,
 		FTP_DELETE,
+		FTP_RENAME,
 		FTP_NONE
 	}FtpType;
 

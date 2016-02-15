@@ -23,6 +23,8 @@ private slots:
 	void slotProcessFtpInfo();
 	void slotCustomContextMenuRequested(const QPoint& pos);
 	void slotDeleteFile();
+	void slotRenameFile();
+	void slotRenameFile(QTreeWidgetItem* item, int column);
 
 private:
 	void initFileList(const QString& ftpPath, QTreeWidgetItem* item);
@@ -35,6 +37,7 @@ private:
 	QString m_strDownloadDir;
 	QString m_strRemoteDir;
 	std::vector<DownInfo*> m_vecInfo;
+	QString m_strOldName;
 };
 
 #endif // FTPDOWNLOAD_H

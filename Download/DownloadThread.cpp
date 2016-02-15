@@ -25,6 +25,9 @@ void DownloadThread::run()
 	case FTP_DELETE:
 		m_iResult = m_pFtp->deleteFile(m_strFtpPath);
 		break;
+	case FTP_RENAME:
+		m_iResult = m_pFtp->rename(m_strFtpPath, m_strLocalPath);
+		break;
 	default:
 		m_iResult = 0;
 		break;

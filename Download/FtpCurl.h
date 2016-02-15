@@ -33,6 +33,9 @@ public:
 	// 删除，ftpPath：文件在ftp的路径
 	int deleteFile(const std::string& ftpPath);
 
+	// 重命名，ftpPath：文件在ftp的路径，newFtpPath新名称
+	int rename(const std::string& ftpPath, const std::string& newFtpPath);
+
 private:
 	static size_t wirteFile(void *ptr, size_t size, size_t nmemb, void *data);
 	static size_t contentlegth(void* ptr, size_t size, size_t nmemb, void* stream);
