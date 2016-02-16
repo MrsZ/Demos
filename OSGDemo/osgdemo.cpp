@@ -31,7 +31,7 @@ void OSGDemo::slotAddModels()
 	m_p3DWidget->getRoot()->removeChildren(0, m_p3DWidget->getRoot()->getNumChildren());
 	foreach(QString model, listModels)
 	{
-		m_p3DWidget->getRoot()->addChild(osgDB::readNodeFile(model.toStdString()));
+		m_p3DWidget->getRoot()->addChild(osgDB::readNodeFile(model.toLocal8Bit().data()));
 	}
 }
 

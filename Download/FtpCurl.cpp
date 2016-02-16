@@ -84,7 +84,7 @@ int FtpCurl::downLoad( const std::string& ftpPath, const std::string& localPath 
 		return -1;
 	}
 
-	// 获取文件在服务器的位置信息，格式如：ftp://admin:123456@192.168.3.91/1111.doc
+	// 获取文件在服务器的位置信息
 	std::string strUser = m_strFtpName;
 	strUser.append(":");
 	strUser.append(m_strFtpPassword);
@@ -138,7 +138,7 @@ int FtpCurl::upLoad( const std::string& ftpPath, const std::string& localPath )
 		return -1;
 	}
 
-	// 获取文件在服务器的位置信息，格式如：ftp://admin:123456@192.168.3.91/1111.doc
+	// 获取文件在服务器的位置信息
 	std::string strUser = m_strFtpName;
 	strUser.append(":");
 	strUser.append(m_strFtpPassword);
@@ -205,7 +205,7 @@ int FtpCurl::deleteFile(const std::string& ftpPath)
 {
 	int ret = 0;
 
-	// 获取文件在服务器的位置信息，格式如：ftp://admin:123456@192.168.3.91/1111.doc
+	// 获取文件在服务器的位置信息
 	std::string strUser = m_strFtpName;
 	strUser.append(":");
 	strUser.append(m_strFtpPassword);
@@ -241,7 +241,7 @@ int FtpCurl::rename(const std::string& ftpPath, const std::string& newFtpPath)
 {
 	int ret = 0;
 
-	// 获取文件在服务器的位置信息，格式如：ftp://admin:123456@192.168.3.91/1111.doc
+	// 获取文件在服务器的位置信息
 	std::string strUser = m_strFtpName;
 	strUser.append(":");
 	strUser.append(m_strFtpPassword);
