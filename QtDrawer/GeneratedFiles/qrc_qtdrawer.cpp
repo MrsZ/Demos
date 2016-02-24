@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Resource object code
 **
-** Created by: The Resource Compiler for Qt version 5.5.1
+** Created by: The Resource Compiler for Qt version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 static const unsigned char qt_resource_data[] = {
-  // D:/project/Demos/QtDrawer/Hydrangeas.jpg
+  // E:/project/Demos/QtDrawer/Hydrangeas.jpg
   0x0,0x9,0x15,0x54,
   0xff,
   0xd8,0xff,0xe0,0x0,0x10,0x4a,0x46,0x49,0x46,0x0,0x1,0x2,0x1,0x0,0x60,0x0,

@@ -1,35 +1,34 @@
 #ifndef EVENTADAPTER_H
 #define EVENTADAPTER_H
-#include <QInputEvent>
-#include <QKeyEvent>
-#include <QMouseEvent>
-#include <QWheelEvent>
-#include <QGLWidget>
-#include <osgViewer/GraphicsWindow>
+#include <QtOpenGL/QGLWidget>
+#include <osgViewer/View>
+#include <QtGui/QKeyEvent>
 
 class EventAdapter : public QGLWidget
 {
+	Q_OBJECT
 public:
-	EventAdapter(QWidget *parent = 0);
-	~EventAdapter();
+	EventAdapter(QWidget* parent=0,const char* name=0,const QGLWidget* shareWidget=0,Qt::WindowFlags flag=0);
+	~EventAdapter(void);
+
+	osgViewer::GraphicsWindow* getGraphicsWindow(){ return m_pGraphicsWindow.get(); }
+	const osgViewer::GraphicsWindow* getGraphicsWindow()const{ return m_pGraphicsWindow.get(); }
 
 protected:
+	// Qt与OSG的事件传递;
+	void setKeyboardModifiers(QInputEvent* event);
+	virtual void resizeGL(int width,int height);
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
 	virtual void mousePressEvent(QMouseEvent* event);
+	virtual void mouseDoubleClickEvent(QMouseEvent *);
 	virtual void mouseReleaseEvent(QMouseEvent* event);
-	virtual void mouseDoubleClickEvent(QMouseEvent* event);
 	virtual void mouseMoveEvent(QMouseEvent* event);
-	virtual void wheelEvent(QWheelEvent* event);
-	virtual void resizeEvent(QResizeEvent *event);
-	virtual void moveEvent(QMoveEvent* event);
-	virtual void timerEvent(QTimerEvent *event);
+	virtual void wheelEvent(QWheelEvent*);
+	osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> m_pGraphicsWindow;
 
-protected:
-	osgViewer::GraphicsWindow* m_pGraphicsWindow;
-
-private:
-	void setKeyboardModifiers(QInputEvent* event);
+private: 
+	
 };
 
 #endif // EVENTADAPTER_H
