@@ -2,6 +2,7 @@
 #include <osgGA/TrackballManipulator>
 #include <osgGA/StateSetManipulator>
 #include <osgViewer/ViewerEventHandlers>
+#include <osgDB/ReadFile>
 
 Widget3D::Widget3D(QWidget *parent)
 	: EventAdapter(parent)

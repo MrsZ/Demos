@@ -33,6 +33,9 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{9e7667d8-23a7-4faa-8e4f-07d6a5e41df0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EventAdapter.cpp">
@@ -65,6 +68,15 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_widget3d.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="nodetools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationControl.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationPathFinder.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="findnode.h">
@@ -88,5 +100,16 @@
     <CustomBuild Include="GeneratedFiles\ui_osgdemo.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="nodetools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationControl.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationPathFinder.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
