@@ -15,8 +15,6 @@ public:
 	Widget3D(QWidget *parent = 0);
 	~Widget3D();
 
-	osg::ref_ptr<osg::Group> getRoot() { return m_pRoot; }
-
 protected:
 	virtual void paintGL();
 

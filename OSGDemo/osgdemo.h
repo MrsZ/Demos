@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "ui_osgdemo.h"
-#include "widget3d.h"
+#include "OSGTool/widget3d.h"
 
 class OSGDemo : public QMainWindow
 {

@@ -3,6 +3,7 @@
 #include <osgGA/StateSetManipulator>
 #include <osgViewer/ViewerEventHandlers>
 #include <osgDB/ReadFile>
+#include "Core.h"
 
 Widget3D::Widget3D(QWidget *parent)
 	: EventAdapter(parent)
@@ -35,7 +36,8 @@ void Widget3D::initViewer()
 	m_pRoot->getOrCreateStateSet()->setMode(GL_DEPTH_TEST, osg::StateAttribute::ON);
 	this->setSceneData(m_pRoot);
 
-	startTimer(0);
+	Core::ins()->setRoot(m_pRoot);
+	Core::ins()->setViewer(this);
 }
 
 osg::ref_ptr<osg::Camera> Widget3D::createCamera( int x, int y, int w, int h )

@@ -1,6 +1,7 @@
 #include "osgdemo.h"
 #include <QFileDialog>
 #include <osgDB/ReadFile>
+#include "Core.h"
 
 OSGDemo::OSGDemo(QWidget *parent)
 	: QMainWindow(parent)
@@ -28,10 +29,10 @@ void OSGDemo::slotAddModels()
 		"D:/SSIT/project/3dEngine/STSDK/Tool/QtDockWidget/Data",
 		"Images (*.osg *.ive *.osgd)");
 
-	m_p3DWidget->getRoot()->removeChildren(0, m_p3DWidget->getRoot()->getNumChildren());
+	//m_p3DWidget->getRoot()->removeChildren(0, m_p3DWidget->getRoot()->getNumChildren());
 	foreach(QString model, listModels)
 	{
-		m_p3DWidget->getRoot()->addChild(osgDB::readNodeFile(model.toLocal8Bit().data()));
+		Core::ins()->getRoot()->addChild(osgDB::readNodeFile(model.toLocal8Bit().data()));
 	}
 }
 
