@@ -12,6 +12,7 @@
 *.so
 *.dylib
 *.dll
+!3rdParty/ffmpeg/bin/*.dll
 
 # Fortran module files
 *.mod
@@ -26,6 +27,7 @@
 *.exe
 *.out
 *.app
+!3rdParty/ffmpeg/bin/*.exe
 
 # vcproject
 *.ncb
