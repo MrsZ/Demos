@@ -10,3 +10,5 @@
 ###增加一个使用SAPI进行文字信息语音播放的例子
 
 ###增加一个使用QNetworkAccessManager模拟完成webserver登录的功能
+
+###增加一个调用ffmpeg进行屏幕视频录制的例子，本例子采用直接调用ffmpeg的方法，没有自己写代码(偷懒了),上传的ffmpeg是2.3.6版本的
