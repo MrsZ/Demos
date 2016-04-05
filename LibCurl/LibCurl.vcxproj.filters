@@ -21,9 +21,15 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="HttpCurl.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FtpCurl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpCurl.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

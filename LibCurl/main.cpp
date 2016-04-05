@@ -1,8 +1,10 @@
 #include <iostream>
 #include "FtpCurl.h"
+#include "HttpCurl.h"
 
 int main(int argc, char **argv)
 {
+#if 0 // ≤‚ ‘ftp
 	FtpCurl curl;
 	curl.setConnect("admin", "123456", "ftp://192.168.3.113/");
 	int ret = 0;
@@ -24,6 +26,10 @@ int main(int argc, char **argv)
 	{
 		strErr = curl.getLastError();
 	}
+#else // ≤‚ ‘http
+	HttpCurl curl;
+	std::string str = curl.post("demo", "demo");
+#endif // Ω· ¯≤‚ ‘
 	getchar();
 	return 0;
 }

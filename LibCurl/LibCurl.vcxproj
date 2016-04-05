@@ -94,10 +94,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FtpCurl.cpp" />
+    <ClCompile Include="HttpCurl.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FtpCurl.h" />
+    <ClInclude Include="HttpCurl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

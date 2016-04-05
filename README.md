@@ -9,4 +9,4 @@
 
 ###增加一个使用SAPI进行文字信息语音播放的例子
 
-###增加一个OSG的Demo
+###增加一个使用QNetworkAccessManager模拟完成webserver登录的功能
