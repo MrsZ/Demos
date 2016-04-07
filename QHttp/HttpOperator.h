@@ -19,8 +19,13 @@ public:
 	HttpOperator(QObject *parent = 0);
 	~HttpOperator();
 
-	void login(const QString& name, const QString& passwd);
+	// 实现post方法模拟webserver
+	void post(QUrl url, const std::string& strSend);
+
+	// 获取post方法成功后的返回信息
 	QString getRecv() { return m_strRecv; }
+
+	// 获取服务器返回的错误信息
 	QNetworkReply::NetworkError getLastError(){ return m_error; }
 
 private slots:

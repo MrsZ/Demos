@@ -87,12 +87,15 @@ void FtpDownload::slotDownload(QTreeWidgetItem* item)
 	QString strName = item->data(0, Qt::UserRole).toString();
 	int nPos = strName.lastIndexOf("/");
 	strName = strName.right(strName.length() - nPos);
+	//strName = strName.simplified();
 	QString strLoacal = m_strDownloadDir;
 	strLoacal.append(strName);
 	DownInfo* pInfo = new DownInfo;
 	pInfo->name = strName.toLocal8Bit().data();
 	thr->m_pFtp->setProcess(pInfo);
-	thr->downLoad(item->data(0, Qt::UserRole).toString().toLocal8Bit().data(),
+	QString strRomte = item->data(0, Qt::UserRole).toString();
+	//strRomte.replace(" ", "%20");
+	thr->downLoad(strRomte.toLocal8Bit().data(),
 		strLoacal.toLocal8Bit().data(), DownloadThread::FTP_DOWNLOAD);
 
 	QString strContent = QString(QStringLiteral("正在下载 "));
@@ -148,6 +151,7 @@ void FtpDownload::initFileList(const QString& ftpPath, QTreeWidgetItem* item)
 	while (!file.atEnd())
 	{
 		QString str = QString::fromUtf8(file.readLine().data());
+		QString strName = str.right(str.length() - 49);
 		str = str.simplified();
 		QStringList list = str.split(" ");
 		if(list.size() < 9)
@@ -157,11 +161,7 @@ void FtpDownload::initFileList(const QString& ftpPath, QTreeWidgetItem* item)
 
 		int row = 0;
 		pItem = new QTreeWidgetItem;
-		QString strName = list.at(8);
-		for (int j = 9; j < list.size(); ++j)
-		{
-			strName.append(" ").append(list.at(j));
-		}
+		
 		pItem->setText(0, strName);         // 名称
 		pItem->setData(0, Qt::UserRole, ftpPath + strName);
 

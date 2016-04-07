@@ -1,6 +1,5 @@
 #include "FtpCurl.h"
 #include <curl/curl.h>
-#include <QString>
 
 FtpCurl::FtpCurl(void)
 {

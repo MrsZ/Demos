@@ -12,27 +12,15 @@ HttpOperator::~HttpOperator()
 
 }
 
-void HttpOperator::login(const QString& name, const QString& passwd)
+void HttpOperator::post(QUrl url, const std::string& strSend)
 {
-	QUrl url("http://119.29.5.61:8003/framework/api/SimulateInterface.asmx");
-	QString content = QString("<?xml version=\"1.0\" encoding=\"utf-8\"?>"
-		"<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">"
-		"<soap12:Body>"
-		"<Login xmlns=\"http://tempuri.org/\">"
-		"<loginname>%1</loginname>"
-		"<password>%2</password>"
-		"</Login>"
-		"</soap12:Body>"
-		"</soap12:Envelope>"
-		).arg(name).arg(passwd);
 	QNetworkRequest request;
 	request.setUrl(url);
-	request.setRawHeader("POST", url.path().toUtf8());
-	request.setRawHeader("Host", url.host().toUtf8());
-	int i = content.length();
+	request.setRawHeader("POST", "/framework/api/SimulateInterface.asmx HTTP/1.1");
+	request.setRawHeader("Host", "119.29.5.61");
 	request.setRawHeader("Content-Type", "application/soap+xml; charset=utf-8");
-	request.setRawHeader("Content-Length", QString("%1").arg(content.length()).toUtf8());
-	QNetworkReply* reply = m_pNetwork->post(request, content.toUtf8());
+	request.setRawHeader("Content-Length", QString("%1").arg(strSend.length()).toUtf8());
+	m_pNetwork->post(request, strSend.c_str());
 }
 
 void HttpOperator::slotFinished(QNetworkReply* reply)
@@ -41,18 +29,10 @@ void HttpOperator::slotFinished(QNetworkReply* reply)
 		reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
 	QVariant redirectionTargetUrl =
 		reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
-	std::string str;
 	m_error = reply->error();
 	if (m_error == QNetworkReply::NoError)
 	{
-		QString string = QString::fromUtf8(reply->readAll());
-		string.replace("&lt;", "<");
-		string.replace("&gt;", ">");
-		string.replace("<?xml version=\"1.0\" encoding=\"utf-8\" ?>", "");
-		string.replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>", "");
-		string.replace("< >", "");
-		string.replace("</ >", "");
-		m_strRecv = string;
+		m_strRecv = QString::fromUtf8(reply->readAll());
 	}
 
 	emit signalFinished();
